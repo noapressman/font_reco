@@ -1,6 +1,7 @@
 // State
 let fonts = [];
 let currentFontId = null;
+let previousFontId = null;
 let score = { correct: 0, total: 0 };
 let answered = false;
 
@@ -64,7 +65,12 @@ function renderFontButtons() {
 function pickRandomFont() {
     if (fonts.length === 0) return;
 
-    const randomIndex = Math.floor(Math.random() * fonts.length);
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * fonts.length);
+    } while (fonts[randomIndex].id === previousFontId && fonts.length > 1);
+
+    previousFontId = currentFontId;
     currentFontId = fonts[randomIndex].id;
     fontDisplay.style.fontFamily = `'${currentFontId}'`;
 }
