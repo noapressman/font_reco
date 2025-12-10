@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>זיהוי פונטים</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>זיהוי פונטים</h1>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <label for="custom-word">הקלידו מילה להצגה:</label>
+                <input type="text" id="custom-word" value="שלום" dir="rtl">
+            </section>
+
+            <section class="display-section">
+                <div id="font-display" class="font-display">שלום</div>
+            </section>
+
+            <section class="score-section">
+                <span>נכון: <span id="correct-count">0</span></span>
+                <span> / </span>
+                <span>סה"כ: <span id="total-count">0</span></span>
+            </section>
+
+            <section class="options-section">
+                <div id="font-options" class="font-options"></div>
+            </section>
+
+            <section class="controls-section">
+                <button id="next-btn" class="next-btn" disabled>הבא</button>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
