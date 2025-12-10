@@ -26,27 +26,19 @@ async function loadFonts() {
         const response = await fetch('fonts/fonts.json');
         fonts = await response.json();
 
-        // Create style element for @font-face rules
-        const styleEl = document.createElement('style');
-        let cssRules = '';
-
-        fonts.forEach(font => {
-            let format = 'truetype'; // default for .ttf
-            if (font.file.endsWith('.woff2')) format = 'woff2';
-            else if (font.file.endsWith('.woff')) format = 'woff';
-            else if (font.file.endsWith('.otf')) format = 'opentype';
-
-            cssRules += `
-                @font-face {
-                    font-family: '${font.id}';
-                    src: url('fonts/${font.file}') format('${format}');
-                    font-display: swap;
-                }
-            `;
+        // Load fonts using FontFace API
+        const fontPromises = fonts.map(font => {
+            const fontFace = new FontFace(font.id, `url('fonts/${font.file}')`);
+            return fontFace.load().then(loadedFont => {
+                document.fonts.add(loadedFont);
+                return loadedFont;
+            });
         });
 
-        styleEl.textContent = cssRules;
-        document.head.appendChild(styleEl);
+        await Promise.all(fontPromises);
+
+        // Sort fonts alphabetically by Hebrew name
+        fonts.sort((a, b) => a.name.localeCompare(b.name, 'he'));
     } catch (error) {
         console.error('Error loading fonts:', error);
         fontOptionsContainer.innerHTML = '<p>שגיאה בטעינת הפונטים. ודאו שקובץ fonts.json קיים.</p>';
@@ -61,6 +53,7 @@ function renderFontButtons() {
         const button = document.createElement('button');
         button.className = 'font-option';
         button.textContent = font.name;
+        button.style.fontFamily = `'${font.id}'`;
         button.dataset.fontId = font.id;
         button.addEventListener('click', () => handleGuess(font.id));
         fontOptionsContainer.appendChild(button);
