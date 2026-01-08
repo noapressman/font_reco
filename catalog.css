@@ -78,6 +78,24 @@ main {
     border-color: #007bff;
 }
 
+.size-slider {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.size-label {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+#font-size-slider {
+    width: 200px;
+    cursor: pointer;
+}
+
 .font-catalog {
     display: flex;
     flex-direction: column;

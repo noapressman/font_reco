@@ -4,12 +4,14 @@ let fonts = [];
 // DOM elements
 const previewTextInput = document.getElementById('preview-text');
 const fontCatalog = document.getElementById('font-catalog');
+const fontSizeSlider = document.getElementById('font-size-slider');
 
 // Initialize
 async function init() {
     await loadFonts();
     renderCatalog();
     setupEventListeners();
+    updateFontSize();
 }
 
 // Load fonts from JSON and inject @font-face rules
@@ -81,9 +83,19 @@ function updatePreviews() {
     });
 }
 
+// Update font size from slider
+function updateFontSize() {
+    const size = fontSizeSlider.value;
+    const previews = fontCatalog.querySelectorAll('.font-preview');
+    previews.forEach(preview => {
+        preview.style.fontSize = `${size}rem`;
+    });
+}
+
 // Setup event listeners
 function setupEventListeners() {
     previewTextInput.addEventListener('input', updatePreviews);
+    fontSizeSlider.addEventListener('input', updateFontSize);
 }
 
 // Start the app
