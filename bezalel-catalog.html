@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קטלוג בצלאל</title>
+    <style>
+        @font-face {
+            font-family: 'narkiss-block-regular';
+            src: url('fonts/NarkissBlock-Regular.otf') format('opentype');
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'narkiss-block-regular', Arial, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .pdf-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .download-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .download-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>קטלוג בצלאל לטיפוגרפיה עברית 2020</h1>
+            <nav>
+                <a href="index.html">חזרה לתרגול</a>
+                <a href="catalog.html">קטלוג פונטים</a>
+            </nav>
+        </header>
+
+        <main class="pdf-container">
+            <iframe src="Bezalel Hebrew Type Cat 2020.pdf" type="application/pdf"></iframe>
+            <div class="download-link">
+                <a href="Bezalel Hebrew Type Cat 2020.pdf" download>להורדת הקטלוג</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
