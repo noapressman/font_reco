@@ -46,18 +46,70 @@ async function loadFonts() {
     }
 }
 
-// Render all font buttons
-function renderFontButtons() {
-    fontOptionsContainer.innerHTML = '';
+// Group fonts by family
+function groupFontsByFamily() {
+    const families = new Map();
+    const standalone = [];
 
     fonts.forEach(font => {
-        const button = document.createElement('button');
-        button.className = 'font-option';
-        button.textContent = font.name;
-        button.style.fontFamily = `'${font.id}'`;
-        button.dataset.fontId = font.id;
-        button.addEventListener('click', () => handleGuess(font.id));
-        fontOptionsContainer.appendChild(button);
+        if (font.family) {
+            if (!families.has(font.family)) {
+                families.set(font.family, []);
+            }
+            families.get(font.family).push(font);
+        } else {
+            standalone.push(font);
+        }
+    });
+
+    return { families, standalone };
+}
+
+// Render all font buttons grouped by family, in alphabetical order
+function renderFontButtons() {
+    fontOptionsContainer.innerHTML = '';
+    const { families, standalone } = groupFontsByFamily();
+
+    // Create a sorted list of items (families and standalone fonts)
+    const items = [];
+
+    families.forEach((familyFonts, familyName) => {
+        items.push({ type: 'family', name: familyName, fonts: familyFonts });
+    });
+
+    standalone.forEach(font => {
+        items.push({ type: 'standalone', name: font.name, font: font });
+    });
+
+    // Sort alphabetically by name
+    items.sort((a, b) => a.name.localeCompare(b.name, 'he'));
+
+    // Render items in sorted order
+    items.forEach(item => {
+        if (item.type === 'family') {
+            const familyContainer = document.createElement('div');
+            familyContainer.className = 'font-family-group';
+
+            item.fonts.forEach(font => {
+                const button = document.createElement('button');
+                button.className = 'font-option';
+                button.textContent = font.name;
+                button.style.fontFamily = `'${font.id}'`;
+                button.dataset.fontId = font.id;
+                button.addEventListener('click', () => handleGuess(font.id));
+                familyContainer.appendChild(button);
+            });
+
+            fontOptionsContainer.appendChild(familyContainer);
+        } else {
+            const button = document.createElement('button');
+            button.className = 'font-option';
+            button.textContent = item.font.name;
+            button.style.fontFamily = `'${item.font.id}'`;
+            button.dataset.fontId = item.font.id;
+            button.addEventListener('click', () => handleGuess(item.font.id));
+            fontOptionsContainer.appendChild(button);
+        }
     });
 }
 

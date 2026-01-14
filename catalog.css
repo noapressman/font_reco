@@ -97,6 +97,41 @@ main {
     accent-color: #007bff;
 }
 
+.tag-filter-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tag-filter-btn {
+    font-family: 'narkiss-block-regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    border: 2px solid #28a745;
+    border-radius: 15px;
+    background: white;
+    color: #28a745;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag-filter-btn:hover {
+    background: #e8f5e9;
+}
+
+.tag-filter-btn.active {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
 .filter-section {
     margin-bottom: 25px;
     padding-bottom: 20px;
@@ -136,14 +171,27 @@ main {
 .font-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
     justify-content: center;
+    align-items: center;
 }
 
-.font-filter-btn {
+.font-family-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: #f0f7ff;
+}
+
+.font-family-header {
     font-family: 'narkiss-block-regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     padding: 5px 12px;
     font-size: 0.85rem;
+    font-weight: bold;
     border: 2px solid #007bff;
     border-radius: 20px;
     background: white;
@@ -152,14 +200,44 @@ main {
     transition: all 0.2s ease;
 }
 
-.font-filter-btn:hover {
+.font-family-header:hover {
     background: #f0f7ff;
 }
 
-.font-filter-btn.active {
+.font-family-header.active {
     background: #007bff;
     border-color: #007bff;
     color: white;
+}
+
+.font-family-buttons {
+    display: contents;
+}
+
+.font-filter-btn {
+    font-family: 'narkiss-block-regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    border: 2px solid #5c9fd4;
+    border-radius: 20px;
+    background: white;
+    color: #5c9fd4;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.font-filter-btn:hover {
+    background: #eef6fc;
+}
+
+.font-filter-btn.active {
+    background: #5c9fd4;
+    border-color: #5c9fd4;
+    color: white;
+}
+
+.font-filter-btn.standalone {
+    align-self: center;
 }
 
 .font-catalog {
