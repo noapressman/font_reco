@@ -19,7 +19,17 @@
 
         <main>
             <section class="input-section">
-                <label for="custom-word">הקלידו מילה להצגה:</label>
+                <div class="input-row">
+                    <label for="custom-word">הקלידו מילה להצגה:</label>
+                    <div class="mode-toggle">
+                        <span class="mode-label">קל</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="hard-mode-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="mode-label">קשה</span>
+                    </div>
+                </div>
                 <input type="text" id="custom-word" value="שלום" dir="rtl">
             </section>
 

@@ -4,6 +4,7 @@ let currentFontId = null;
 let previousFontId = null;
 let score = { correct: 0, total: 0 };
 let answered = false;
+let hardMode = false;
 
 // DOM elements
 const fontDisplay = document.getElementById('font-display');
@@ -12,6 +13,7 @@ const fontOptionsContainer = document.getElementById('font-options');
 const correctCount = document.getElementById('correct-count');
 const totalCount = document.getElementById('total-count');
 const nextBtn = document.getElementById('next-btn');
+const hardModeToggle = document.getElementById('hard-mode-toggle');
 
 // Initialize
 async function init() {
@@ -94,7 +96,11 @@ function renderFontButtons() {
                 const button = document.createElement('button');
                 button.className = 'font-option';
                 button.textContent = font.name;
-                button.style.fontFamily = `'${font.id}'`;
+                if (hardMode) {
+                    button.style.fontFamily = "'narkiss-block-regular', sans-serif";
+                } else {
+                    button.style.fontFamily = `'${font.id}'`;
+                }
                 button.dataset.fontId = font.id;
                 button.addEventListener('click', () => handleGuess(font.id));
                 familyContainer.appendChild(button);
@@ -105,12 +111,22 @@ function renderFontButtons() {
             const button = document.createElement('button');
             button.className = 'font-option';
             button.textContent = item.font.name;
-            button.style.fontFamily = `'${item.font.id}'`;
+            if (hardMode) {
+                button.style.fontFamily = "'narkiss-block-regular', sans-serif";
+            } else {
+                button.style.fontFamily = `'${item.font.id}'`;
+            }
             button.dataset.fontId = item.font.id;
             button.addEventListener('click', () => handleGuess(item.font.id));
             fontOptionsContainer.appendChild(button);
         }
     });
+}
+
+// Set difficulty mode
+function setMode(isHard) {
+    hardMode = isHard;
+    renderFontButtons();
 }
 
 // Pick a random font and apply it to the display
@@ -186,6 +202,9 @@ function setupEventListeners() {
 
     // Next button
     nextBtn.addEventListener('click', nextQuestion);
+
+    // Mode toggle
+    hardModeToggle.addEventListener('change', (e) => setMode(e.target.checked));
 }
 
 // Start the app
